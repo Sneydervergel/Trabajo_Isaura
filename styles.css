@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+canvas {
+    display: block;
+}
+  
+.hidden {
+    display: none;
+}
+  
+#gameOverContainer {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  
+#resetScoreButton {
+    margin-top: 10px;
+}
+
+.collision-effect {
+    animation: shake 0.7s ease-in-out;
+}
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+}
+  button {
+  
+ 
+background-color: #3498db;
+  
+ 
+border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+ 
+margin: 0 10px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Animación para el mensaje de felicitaciones */
+#congratulationMessage {
+  font-size: 24px;
+  color: #e74c3c;
+  
+ 
+margin-bottom: 10px;
+  
+ 
+opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.5s forwards;
+}
+
+
+}
+
+@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  }
+to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
