@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juego de Cartas SSL</title>
+<link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+<h1>Juego de Cartas SSL</h1>
+<div id="game-container">
+  <div class="card" id="card1">
+    <div class="content">
+      <p>¿Qué significa SSL?</p>
+      <button class="answer" data-correct="true">Secure Sockets Layer</button>
+      <button class="answer">Super Secure Language</button>
+      <button class="answer">Safe Security Loop</button>
+    </div>
+  </div>
+  <div class="card" id="card2">
+    <div class="content">
+      <p>¿Qué protocolo permite la comunicación segura por Internet?</p>
+      <button class="answer">HTTP</button>
+      <button class="answer">FTP</button>
+      <button class="answer" data-correct="true">HTTPS</button>
+    </div>
+  </div>
+  <div class="card" id="card3">
+    <div class="content">
+      <p>¿Cuál es el propósito principal de SSL/TLS?</p>
+      <button class="answer">Optimizar imágenes</button>
+      <button class="answer" data-correct="true">Proteger la transferencia de datos</button>
+      <button class="answer">Crear emojis</button>
+    </div>
+  </div>
+  <div class="card" id="card4">
+  <div class="content">
+    <p>¿Qué tecnología se utiliza para generar y administrar los certificados SSL?</p>
+    <button class="answer">FTP</button>
+    <button class="answer">HTTP</button>
+    <button class="answer" data-correct="true">PKI (Infraestructura de Clave Pública)</button>
+  </div>
+</div>
+<div class="card" id="card5">
+  <div class="content">
+    <p>¿Cuál de las siguientes opciones describe mejor el proceso de "Handshake" en SSL/TLS?</p>
+    <button class="answer">Enviando datos en formato claro</button>
+    <button class="answer" data-correct="true">Estableciendo una conexión segura y negociando claves</button>
+    <button class="answer">Descifrando datos en el servidor</button>
+  </div>
+</div>
+<div class="card" id="card6">
+  <div class="content">
+    <p>¿Qué vulnerabilidad de seguridad se solucionó con la implementación de SSL/TLS?</p>
+    <button class="answer" data-correct="true">Intercepción de datos en tránsito</button>
+    <button class="answer">Uso excesivo de recursos del servidor</button>
+    <button class="answer">Sobrecarga en el tráfico de red</button>
+  </div>
+</div>
+<div class="card" id="card7">
+  <div class="content">
+    <p>¿Qué cifrado simétrico se utiliza comúnmente en el protocolo SSL/TLS?</p>
+    <button class="answer">RSA</button>
+    <button class="answer">AES (Advanced Encryption Standard)</button>
+    <button class="answer" data-correct="true">DES (Data Encryption Standard)</button>
+  </div>
+</div>
+</div>
+<button id="play-button">Jugar</button>
+<div id="score">Puntos: 0</div>
+<div id="game-over">Game Over <br><button id="game-over-restart-button">Volver a Jugar</button></div>
+<div id="winner">¡Ganador!<br><button id="winner-restart-button">Volver a Jugar</button></div>
+<script>
+  const cards = document.querySelectorAll('.card');
+  const playButton = document.getElementById('play-button');
+  const scoreDisplay = document.getElementById('score');
+  const gameOverMessage = document.getElementById('game-over');
+  const winnerMessage = document.getElementById('winner');
+  const particlesContainer = document.getElementById('particles');
+  const gameOverRestartButton = document.getElementById('game-over-restart-button');
+  const winnerRestartButton = document.getElementById('winner-restart-button');
+  
+  gameOverRestartButton.addEventListener('click', () => {
+    location.reload();
+  });
+  
+  winnerRestartButton.addEventListener('click', () => {
+    location.reload();
+  });
+  
+  
+  let remainingCards = [...cards];
+  let points = 0;
+  let currentCard = null;
+  let diceEnabled = true;
+  
+  function enableDice() {
+    playButton.disabled = false;
+    diceEnabled = true;
+  }
+  
+  function disableDice() {
+    playButton.disabled = true;
+    diceEnabled = false;
+  }
+  
+  function shuffleCards() {
+    if (remainingCards.length === 0) {
+      winnerMessage.style.display = 'block';
+      disableDice();
+      return;
+    }
+    
+    currentCard = remainingCards[Math.floor(Math.random() * remainingCards.length)];
+    currentCard.classList.add('selected');
+    currentCard.querySelector('.content').style.display = 'block';
+    disableDice();
+  }
+  
+  function checkAnswer(selectedAnswer) {
+    const isCorrect = selectedAnswer.getAttribute('data-correct') === 'true';
+    
+    if (isCorrect) {
+      points += 10;
+      scoreDisplay.textContent = `Puntos: ${points}`;
+      currentCard.style.display = 'none';
+      remainingCards = remainingCards.filter(card => card !== currentCard);
+      enableDice();
+      
+      if (remainingCards.length === 0) {
+        winnerMessage.style.display = 'block';
+        disableDice();
+      }
+    } else {
+      gameOverMessage.style.display = 'block';
+      resetGame();
+    }
+  }
+  
+  function resetGame() {
+    remainingCards = [...cards];
+    points = 0;
+    scoreDisplay.textContent = 'Puntos: 0';
+    cards.forEach(card => {
+      card.style.display = 'block';
+      card.querySelector('.content').style.display = 'none';
+    });
+    currentCard = null;
+  }
+  
+  playButton.addEventListener('click', () => {
+    if (diceEnabled) {
+      gameOverMessage.style.display = 'none';
+      winnerMessage.style.display = 'none';
+      shuffleCards();
+    }
+  });
+  
+  cards.forEach(card => {
+    const answerButtons = card.querySelectorAll('.answer');
+    answerButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        checkAnswer(button);
+      });
+    });
+  });
+  
+  const numParticles = 100;
+  
+  for (let i = 0; i < numParticles; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDuration = `${Math.random() * 2 + 1}s`;
+    particlesContainer.appendChild(particle);
+  }
+</script>
+</body>
+</html>
+
+
+
+
+

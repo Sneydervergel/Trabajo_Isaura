@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+            <div id="logo">
+                <h1>SSL/TLS</h1>
+            </div>
+        </header>
+        <section class="content">
+            <aside id="left">
+                <div>
+                    <ul>
+                        <a href=""><li>Principal</li></a>
+                        <a href="#video"><li>video</li></a>
+                        <a href="#juego"><li>juego</li></a>
+                        <a href="#Que_es"><li>Que es</li></a>
+                        <a href="#Tipos"><li>Tipos</li></a>                        
+                        <a href="#tilulo_ejemplo2"><li>funcion</li></a>
+                        <a href="#tilulo_ejemplo3"><li>¿Por qué necesito la seguridad SSL?</li></a>
+                    
+                    </ul>
+                </div>
+            </aside>
+            <div id="right">
+                <h2 id="video">video</h2>
+                <p>
+                    Aqui estara el video
+                </p>
+
+                <h2 id="juego">juego</h2>
+                <h3>Inicia A jugar</h3>
+                <p>Se recomienda Jugar despeus de la lectura<Br>
+                    Da clik aqui abajo
+                    <section class="contentju">
+                        <aside id="leftju">
+                            <div>
+                                <ul>
+                                    <a href="GameSSL/GameSSL/Game.html"><li>Juego</li></a>
+                                </ul>
+                            </div>
+                        </aside>
+                    </section>
+                </p>
+                
+                <h2 id="Que_es">Que es</h2>
+                <p>
+                    El Nivel de Conectores Seguros (Secure Sockets Layer o SSL) fue el protocolo de cifrado más ampliamente utilizado para garantizar la seguridad de las comunicaciones a través de Internet antes de ser sustituido por el TLS (inglés) (Seguridad de la Capa de Transporte, o Transport Layer Security) en 1999. Aunque el desuso del protocolo SSL dio paso a la adopción del TLS, la mayoría de las personas sigue refiriéndose a este tipo de tecnología como «SSL».
+EL SSL proporciona un canal seguro entre dos computadoras o dispositivos que operan a través de Internet o de una red interna. Un ejemplo frecuente es el uso de SSL para proteger las comunicaciones entre un navegador web y un servidor web. Este protocolo cambia la dirección del sitio web de HTTP a HTTPS, donde «S» significa «seguridad».
+El protocolo HTTP no es seguro, por lo que es susceptible de sufrir interceptaciones de intrusos, ya que los datos transferidos desde el navegador web al servidor web o entre dos terminales se transmiten como texto plano. De esta forma, los intrusos pueden interceptar y visualizar datos sensibles, como datos de tarjetas de crédito o de acceso a cuentas. Al enviar o publicar datos en un navegador que emplea HTTPS, el SSL garantiza que la información está cifrada y protegida frente a interceptaciones.
+<br><br>
+¿Cómo sé si un sitio web está protegido mediante SSL? <br>
+Desde el punto de vista técnico, el protocolo SSL es un método transparente para establecer una sesión segura que requiere una intervención mínima por parte del usuario final. En el caso de los navegadores, es posible determinar si un sitio web usa SSL cuando se muestra el candado o la barra de direcciones presenta la URL como HTTPS, en lugar de HTTP.
+
+<br><br>
+                    Los certificados SSL vinculan: <br><br>
+
+Un nombre de dominio, un nombre de servidor o nombre de host. <br>
+La identidad de una organización (es decir, el nombre de la empresa) y su ubicación. <br>
+Nota: en agosto de 2020, la mayoría de navegadores dejará de mostrar el candado y la barra de direcciones verde para diferenciar la validación ampliada. <br>
+
+Para poder iniciar sesiones seguras en los navegadores, las organizaciones deben instalar el certificado SSL en sus servidores web. Una vez establecida la conexión segura, el tráfico entre el servidor web y el navegador web estará protegido. <br>
+
+Después de instalar correctamente el certificado en su servidor, el protocolo de aplicación (denominado también HTTP) cambiará a HTTPs, donde «S» significa «Seguridad».<br>
+<br>A continuación, se muestra un ejemplo de sitio web protegido mediante SSL en Chrome 56 y otro ejemplo de sitio web no protegido.
+<img href:"Captura.PNG" ></img>
+                </p>
+                <h2 id="Tipos">Tipos</h2> 
+                <p>
+                    Los certificados SSL/TLS difieren según la validación y el dominio. Los certificados con diferentes niveles de validación se clasifican como:
+                    <br> <br>
+                    <ul list.style="circle" align="left"> 
+                        <li><a href="#Certificados_de_validación_extendida">Certificados de validación extendida</a></li>
+                        <li><a href="#Certificados_validados_por_la_organización ">Certificados validados por la organización </a></li>
+                        <li><a href="#Certificados_validados_por_el_dominio">Certificados validados por el dominio</a> </li>
+                    </ul>
+                   
+                    Los certificados SSL/TLS que admiten diferentes tipos de dominio son:
+                    <ul></ul>
+                    Certificado de dominio único
+                    Certificado comodín
+                    Certificado multidominio
+                    <h3 id="Certificados_de_validación_extendida">Certificados de validación extendida </h3> 
+                    <p>Un certificado de validación extendida (EV SSL/TLS) es un certificado digital que tiene el nivel más alto de cifrado, validación y confianza. Al solicitar un SSL/TLS EV, una organización o el propietario de la web están sujetos a controles estrictos por parte de las autoridades de certificación. Esto incluye verificar la dirección física de la empresa, la solicitud de certificado adecuada y los derechos exclusivos para usar el dominio. 
+                     
+                     
+                    Las empresas utilizan EV SSL/TLS para proteger a los usuarios contra terceros no autorizados. Esto es importante cuando la empresa procesa datos confidenciales en el sitio web, como transacciones financieras y registros médicos. Un certificado EV SSL/TLS contiene detalles de la organización empresarial, que se pueden ver en un navegador.
+                    
+                </p>
+                <h3 id="Certificados_validados_por_la_organización">Certificados de validación organizacional</h3> 
+                    <p>Los certificados de validación organizacional (OV SSL/TLS) son superados por los EV SSL/TLS en términos de validación y confianza. Al igual que los EV SSL/TLS, las empresas deben pasar por un proceso de verificación al solicitar el OV SSL/TLS. Si bien el proceso de investigación es menos estricto, los solicitantes deben demostrar la propiedad del dominio ante las autoridades de certificación.
+                    
+                    El certificado OV SSL/TLS contiene información empresarial validada y se puede inspeccionar en el navegador. Las empresas comerciales y de primera línea utilizan el certificado OV SSL/TLS para generar confianza entre los clientes. El OV SSL/TLS proporciona un cifrado sólido para proteger la privacidad de los clientes cuando navegan por la web. 
+                    </p>
+
+                    <h3 id="Certificados_validados_por_el_dominio"> Certificados de validación de dominios</h3> 
+                    Los certificados de validación de dominio (DV SSL/TLS) son certificados digitales que tienen la validación más baja. También cuesta menos solicitarlos. A diferencia de los SLL con EV y los SSL/TLS OV, los solicitantes de certificados DV pasan por un proceso de investigación menos estricto. El solicitante demuestra la propiedad del dominio al responder a un correo electrónico de verificación o a una llamada telefónica.
+                    
+                    Un certificado DV no contiene información completa de la organización o empresa del solicitante. Por lo tanto, no proporciona una gran garantía a los usuarios. Los certificados DV son adecuados para sitios web informativos, como blogs. No son ideales para puertas de enlace de pago, empresas de atención médica u otros sitios web que manejan datos confidenciales.
+                    
+                    Certificados SSL/TLS de dominio único
+                    Un certificado SSL/TLS de dominio único es un certificado SSL/TLS que solo protege un dominio o subdominio. Un dominio es la dirección URL o dirección principal de un sitio web, como amazon.com. Un subdominio es una dirección web con una extensión de texto que precede al dominio principal, como aws.amazon.com.
+                    
+                    Por ejemplo, puede usar un certificado SSL/TLS de dominio único en http://example.com. Sin embargo, no puede usar el certificado para http://example.com y sub.example.com simultáneamente.
+                    
+                    Certificados SSL/TLS comodín
+                    Un certificado SSL/TLS comodín es un certificado SSL/TLS que protege un dominio y todos sus subdominios. Por ejemplo, puede usar un certificado SSL/TLS comodín para proteger http://example.com, blog.example.com y shop.example.com.
+                    
+                    Certificados SSL/TLS multidominio
+                    Los certificados multidominio también se conocen como certificados de comunicaciones unificadas. Un certificado SSL/TLS multidominio ofrece protección SSL/TLS para varios nombres de dominio alojados en el mismo servidor o en diferentes servidores con la misma propiedad. Por ejemplo, puede comprar un certificado multidominio para http://example1.com, domain2.co.uk, shop.business3.com y chat.message.au. 
+                </p>
+                <h2 id="tilulo_ejemplo2">funcion</h2>
+                <p>
+                    ¿Cómo funciona un certificado SSL/TLS?<br>
+                    Los navegadores utilizan el certificado SSL/TLS para iniciar una conexión segura con el servidor web a través del protocolo de enlace SSL/TLS. El protocolo de enlace SSL/TLS forma parte de la tecnología de comunicación segura (HTTPS) del protocolo de transferencia de hipertexto. Es una combinación de HTTP y SSL/TLS. HTTP es un protocolo que utilizan los navegadores web para enviar información en texto sin formato a un servidor web. HTTP transmite datos no cifrados, lo que significa que la información enviada desde un navegador puede ser interceptada y leída por terceros. Los navegadores utilizan HTTP con SSL/TLS o HTTPS para una comunicación totalmente segura.
+                    protocolo de enlace SSL/TLS
+                    <br> El protocolo de enlace SSL/TLS implica los siguientes pasos:
+                    <br>
+                    <br> El navegador abre un sitio web seguro para SSL/TLS y se conecta al servidor web.
+                    <br> El navegador intenta verificar la autenticidad del servidor web solicitando información identificable. 
+                    <br> El servidor web envía el certificado SSL/TLS que contiene una clave pública como respuesta.
+                    <br> El navegador verifica el certificado SSL/TLS, lo que garantiza que sea válido y coincida con el dominio del sitio web. <br> Una vez que el navegador está satisfecho con el certificado SSL/TLS, utiliza la clave pública para cifrar y enviar un mensaje que contiene una clave de sesión secreta.
+                    <br> El servidor web utiliza su clave privada para descifrar el mensaje y recuperar la clave de sesión. <br> A continuación, utiliza la clave de sesión para cifrar y enviar un mensaje de confirmación al navegador.
+                    Ahora, tanto el navegador como el servidor web cambian a usar la misma clave de sesión para intercambiar mensajes de forma segura. 
+                    <br>Clave de sesión <br>
+                    Una clave de sesión mantiene la comunicación cifrada entre el navegador y el servidor web una vez completada la autenticación SSL/TLS inicial. La clave de sesión es una clave de cifrado para la criptografía simétrica. La criptografía simétrica utiliza la misma clave tanto para el cifrado como para el descifrado. La criptografía asimétrica ocupa una inmensa potencia de cálculo. Por lo tanto, el servidor web cambia a la criptografía simétrica que requiere menos cálculos para mantener una conexión SSL/TLS.
+</p>
+                <h2 id="tilulo_ejemplo3">¿Por qué necesito la seguridad SSL?</h2> 
+                <p>
+                   ¿Por qué necesito la seguridad SSL?
+		Son muchas las transacciones y comunicaciones que realizamos cada día a través de Internet, por lo que usar SSL es en realidad lo más lógico. El SSL es compatible con los siguientes principios de seguridad de la información:
+			<ul list.style="circle" align="left">
+				<li>⦁	Cifrado: protege la transmisión de datos (p. ej., de navegador a servidor, de servidor a servidor, de aplicación a aplicación, etc.).</li>
+				<li>⦁	Autenticación: garantiza que el servidor al que se conecta es, en efecto, el servidor correcto.</li>
+				<li>⦁	Integridad de los datos: garantiza que los datos solicitados o enviados son realmente los datos legítimos.</li>
+			</ul>
+		El SSL puede utilizarse para proteger:
+			<ul list.style="circle" align="left"> 
+				<li>⦁	Las transacciones mediante tarjeta de crédito a través de Internet u otros pagos a través de Internet.</li>
+				<li>⦁	El tráfico a través de una intranet, por ejemplo, una red interna, la función de compartir archivos, las extranets o las conexiones con bases de datos.</li>
+				<li>⦁	Los servidores de correo web, como el acceso web a Outlook o los servidores Exchange y Office Communications.</li>
+				<li>⦁	La conexión entre un cliente de correo electrónico como Microsoft Outlook y un servidor de correo electrónico como Microsoft Exchange.</li>
+				<li>⦁	La transferencia de archivos mediante HTTPS y los servicios de FTP, como las actualizaciones de nuevas páginas por parte del responsable del sitio web o la transferencia de archivos de gran tamaño.</li>
+				<li>⦁	Los accesos al sistema en aplicaciones y paneles de control como Parallels, cPanel y muchos otros.</li>
+				<li>⦁	Los procesos de trabajo y la virtualización de aplicaciones como las plataformas Citrix Delivery o las plataformas de computación basadas en la nube.</li>
+				<li>⦁	Los accesos y la actividad en paneles de control de hosting, como Parallels o cPanel, entre otros.</li>
+			</ul>
+                </p>
+            </div>
+        </section>
+        <footer>
+            <div id="logo">&copy;Sena</div>
+            <div id="f_right">2023</div>
+          Edwin Quitero,Jhoan Mena,Sneyder Vergel <BR></BR> Sebastian Gonzales,Sergio Calderon
+
+        </footer>
+    </div>
+</body>
+</html>
