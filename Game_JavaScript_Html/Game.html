@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="spaceship"></div>
+  </div>
+  
+  <div id="game-over" style="display: none;">
+    <img src="gameover.png" alt="Game Over" />
+    <h2>GAME OVER</h2>
+    <p id="duration">Tiempo de Juego: 0 segundos</p>
+    <button id="play-again-button">Jugar de nuevo</button>
+  </div>
+  <button id="start-button">Comenzar</button>
+  
+<script>
+  const startButton = document.getElementById('start-button');
+  const gameContainer = document.getElementById('game-container');
+  const spaceship = document.getElementById('spaceship');
+  let meteors = [];
+  let bullets = [];
+  let gameStopped = false;
+
+  let moveLeftIndicator = false;
+  let moveRightIndicator = false;
+  let shooting = false;
+
+  let meteorInterval = 200;
+  let intensity = 1; 
+
+  let startTime = Date.now();
+
+
+  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keyup', handleKeyUp);
+  document.addEventListener('mousedown', () => {
+    shooting = true;
+    shoot();
+  });
+  document.addEventListener('mouseup', () => {
+    shooting = false;
+  });
+document.getElementById('play-again-button').addEventListener('click', () => {
+  location.reload(); 
+});
+
+
+
+  function handleKeyDown(event) {
+    if (!gameStopped) {
+      if (event.key === 'ArrowLeft') {
+        moveLeftIndicator = true;
+      } else if (event.key === 'ArrowRight') {
+        moveRightIndicator = true;
+      }
+    }
+  }
+
+  function handleKeyUp(event) {
+    if (!gameStopped) {
+      if (event.key === 'ArrowLeft') {
+        moveLeftIndicator = false;
+      } else if (event.key === 'ArrowRight') {
+        moveRightIndicator = false;
+      }
+    }
+  }
+
+  function moveSpaceship() {
+    if (moveLeftIndicator) {
+      moveLeft();
+    } else if (moveRightIndicator) {
+      moveRight();
+    }
+  }
+
+  function moveLeft() {
+    const spaceshipLeft = parseInt(spaceship.style.left) || (window.innerWidth - 50) / 2;
+    if (spaceshipLeft > 0) {
+      spaceship.style.left = `${spaceshipLeft - 10}px`;
+    }
+  }
+
+  function moveRight() {
+    const spaceshipLeft = parseInt(spaceship.style.left) || (window.innerWidth - 50) / 2;
+    if (spaceshipLeft < window.innerWidth - 50) {
+      spaceship.style.left = `${spaceshipLeft + 10}px`;
+    }
+  }
+
+  function shoot() {
+    if (!gameStopped) {
+      createBullet();
+    }
+  }
+
+  function createBullet() {
+    const bullet = document.createElement('div');
+    bullet.className = 'bullet';
+    const spaceshipRect = spaceship.getBoundingClientRect();
+    const bulletLeft = spaceshipRect.left + spaceshipRect.width / 2 - bullet.offsetWidth / 2;
+    const bulletBottom = parseInt(spaceship.style.bottom) || 20;
+    bullet.style.left = `${bulletLeft}px`;
+    bullet.style.bottom = `${bulletBottom + 50}px`;
+    gameContainer.appendChild(bullet);
+    bullets.push(bullet);
+  }
+
+  function moveBullets() {
+    for (let i = bullets.length - 1; i >= 0; i--) {
+      const bullet = bullets[i];
+      const bulletTop = parseInt(bullet.style.bottom) || 0;
+      if (bulletTop < window.innerHeight) {
+        bullet.style.bottom = `${bulletTop + 5}px`;
+        checkBulletCollision(bullet);
+      } else {
+        bullet.remove();
+        bullets.splice(i, 1);
+      }
+    }
+  }
+
+  function checkBulletCollision(bullet) {
+    const bulletRect = bullet.getBoundingClientRect();
+    for (let i = meteors.length - 1; i >= 0; i--) {
+      const meteor = meteors[i];
+      const meteorRect = meteor.getBoundingClientRect();
+      if (
+        bulletRect.left < meteorRect.right &&
+        bulletRect.right > meteorRect.left &&
+        bulletRect.top < meteorRect.bottom &&
+        bulletRect.bottom > meteorRect.top
+      ) {
+        bullet.remove();
+        bullets.splice(bullets.indexOf(bullet), 1);
+        meteor.remove();
+        meteors.splice(i, 1);
+      }
+    }
+  }
+
+  function createMeteor() {
+    const isLargeMeteor = Math.random() < 0.1;
+    const meteor = document.createElement('div');
+    meteor.className = isLargeMeteor ? 'meteor large-meteor' : 'meteor';
+    meteor.style.left = `${Math.random() * (window.innerWidth - (isLargeMeteor ? 100 : 30))}px`;
+    gameContainer.appendChild(meteor);
+    meteors.push(meteor);
+  }
+
+  function moveMeteors() {
+    for (let i = meteors.length - 1; i >= 0; i--) {
+      const meteor = meteors[i];
+      const meteorTop = parseInt(meteor.style.top) || 0;
+      const isLargeMeteor = meteor.classList.contains('large-meteor');
+      const speed = isLargeMeteor ? 8 : 5;
+
+      if (meteorTop < window.innerHeight) {
+        meteor.style.top = `${meteorTop + speed}px`;
+        
+        const spaceshipRect = spaceship.getBoundingClientRect();
+        const meteorRect = meteor.getBoundingClientRect();
+
+        const spaceshipCenterX = spaceshipRect.left + spaceshipRect.width / 2;
+        const spaceshipCenterY = spaceshipRect.top + spaceshipRect.height / 2;
+        const meteorCenterX = meteorRect.left + meteorRect.width / 2;
+        const meteorCenterY = meteorRect.top + meteorRect.height / 2;
+
+        const horizontalCollision = Math.abs(spaceshipCenterX - meteorCenterX) < (isLargeMeteor ? 40 : 15);
+        const verticalCollision = Math.abs(spaceshipCenterY - meteorCenterY) < (isLargeMeteor ? 40 : 15);
+
+        if (horizontalCollision && verticalCollision) {
+          gameStopped = true;
+          clearInterval(gameLoopInterval);
+          showGameOverScreen();
+        }
+      } else {
+        meteor.remove();
+        meteors.splice(i, 1);
+      }
+    }
+  }
+
+  function increaseIntensity() {
+    intensity += 0.1;
+    meteorInterval = 2000 / intensity;
+  }
+
+  function showGameOverScreen() {
+    const gameOverScreen = document.getElementById('game-over');
+    gameOverScreen.style.display = 'block';
+  }
+
+  function gameLoop() {
+  if (!gameStopped) {
+    if (shooting) {
+      createBullet();
+    }
+    if (Math.random() < 0.50) {
+      createMeteor();
+    }
+    moveSpaceship();
+    moveBullets();
+    moveMeteors();
+
+    const currentTime = Date.now();
+    const elapsedTime = Math.floor((currentTime - startTime) / 1000); 
+
+    const durationElement = document.getElementById('duration');
+    durationElement.innerText = `Duración: ${elapsedTime} segundos`;
+  }
+}
+
+
+  const gameLoopInterval = setInterval(gameLoop, 20);
+  setInterval(() => {
+    if (!gameStopped) {
+      createMeteor();
+    }
+  }, meteorInterval);
+
+  setInterval(increaseIntensity, 5000); 
+
+</script>
+
+</body>
+</html>
+
+
